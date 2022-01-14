@@ -19,6 +19,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 
+#@ String(label = "Fill Holes?", choices = {"no", "yes"}, style = "radioButtonHorizontal", persist=false)  fill_holes_choice
+
+
 // generate result lists to be populated by the script
 area = newArray;
 areaFraction = newArray;
@@ -40,8 +43,10 @@ run("Set Measurements...", "area display redirect=None decimal=3");
 setOption("ScaleConversions", true);
 run("8-bit");
 
-// toggle this line off if required by adding "//" 
-//run("Fill Holes", "stack");
+// toggle this line if required by adding "//" 
+if (fill_holes_choice == "yes"){
+	run("Fill Holes", "stack");
+}
 
 run("Invert", "stack");
 //smooth segmentation mask 
